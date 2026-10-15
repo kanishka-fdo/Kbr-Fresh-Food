@@ -291,12 +291,12 @@ const updateOrderStatus = async (req, res) => {
           template.subject,
           '',
           `
-            <div style="font-family:sans-serif;max-width:600px;margin:auto;background:#f9fafb;border-radius:12px;overflow:hidden;">
+            <div style="font-family:'Roboto',Arial,sans-serif;max-width:600px;margin:auto;background:#f9fafb;border-radius:12px;overflow:hidden;">
               <div style="background:#16a34a;padding:24px 32px;">
-                <h1 style="color:white;margin:0;font-size:22px;"><svg style="display:inline-block;vertical-align:middle;margin-right:8px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</h1>
+                <h1 style="font-family:'Google Sans',Roboto,Arial,sans-serif;color:white;margin:0;font-size:22px;"><svg style="display:inline-block;vertical-align:middle;margin-right:8px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</h1>
               </div>
-              <div style="padding:32px;">
-                <h2 style="color:#15803d;margin-top:0;">Hi ${populated.customer.name}!</h2>
+              <div style="padding:32px;font-family:'Roboto',Arial,sans-serif;">
+                <h2 style="font-family:'Google Sans',Roboto,Arial,sans-serif;color:#15803d;margin-top:0;">Hi ${populated.customer.name}!</h2>
                 ${template.body}
                 <p style="color:#4b5563;font-size:14px;margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;">Order #: <strong>${order.orderNumber}</strong></p>
               </div>
@@ -368,12 +368,12 @@ const verifyQrCode = async (req, res) => {
         `Order ${order.orderNumber} delivered successfully!`,
         '',
         `
-          <div style="font-family:sans-serif;max-width:600px;margin:auto;background:#f9fafb;border-radius:12px;overflow:hidden;">
+          <div style="font-family:'Roboto',Arial,sans-serif;max-width:600px;margin:auto;background:#f9fafb;border-radius:12px;overflow:hidden;">
             <div style="background:#16a34a;padding:24px 32px;">
-              <h1 style="color:white;margin:0;font-size:22px;"><svg style="display:inline-block;vertical-align:middle;margin-right:8px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</h1>
+              <h1 style="font-family:'Google Sans',Roboto,Arial,sans-serif;color:white;margin:0;font-size:22px;"><svg style="display:inline-block;vertical-align:middle;margin-right:8px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</h1>
             </div>
-            <div style="padding:32px;">
-              <h2 style="color:#15803d;margin-top:0;">Hi ${populated.customer.name}!</h2>
+            <div style="padding:32px;font-family:'Roboto',Arial,sans-serif;">
+              <h2 style="font-family:'Google Sans',Roboto,Arial,sans-serif;color:#15803d;margin-top:0;">Hi ${populated.customer.name}!</h2>
               <p style="color:#4b5563;">Your order <strong>${order.orderNumber}</strong> has been delivered and securely verified via QR code.</p>
               <p style="color:#4b5563;">Thank you for choosing KBR Fresh Foods.</p>
             </div>
@@ -443,12 +443,12 @@ const cancelOrder = async (req, res) => {
           `Order ${order.orderNumber} Cancelled`,
           '',
           `
-            <div style="font-family:sans-serif;max-width:600px;margin:auto;background:#f9fafb;border-radius:12px;overflow:hidden;">
+            <div style="font-family:'Roboto',Arial,sans-serif;max-width:600px;margin:auto;background:#f9fafb;border-radius:12px;overflow:hidden;">
               <div style="background:#16a34a;padding:24px 32px;">
-                <h1 style="color:white;margin:0;font-size:22px;"><svg style="display:inline-block;vertical-align:middle;margin-right:8px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</h1>
+                <h1 style="font-family:'Google Sans',Roboto,Arial,sans-serif;color:white;margin:0;font-size:22px;"><svg style="display:inline-block;vertical-align:middle;margin-right:8px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</h1>
               </div>
-              <div style="padding:32px;">
-                <h2 style="color:#15803d;margin-top:0;">Hi ${populated.customer.name}!</h2>
+              <div style="padding:32px;font-family:'Roboto',Arial,sans-serif;">
+                <h2 style="font-family:'Google Sans',Roboto,Arial,sans-serif;color:#15803d;margin-top:0;">Hi ${populated.customer.name}!</h2>
                 <p style="color:#4b5563;">Your order <strong>${order.orderNumber}</strong> has been cancelled as requested.</p>
                 <p style="color:#4b5563;">If you had already paid, a refund will be processed within 3–5 business days.</p>
                 <p style="color:#4b5563;">Questions? Contact us at +94 77 977 9316.</p>
