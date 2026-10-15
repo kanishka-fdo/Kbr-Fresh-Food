@@ -1,3 +1,5 @@
+import daisyui from 'daisyui';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
@@ -79,5 +81,29 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [daisyui],
+  daisyui: {
+    prefix: 'ui-',
+    base: false,
+    utils: true,
+    logs: false,
+    themes: [{ kbr: {
+      primary: '#176f3c',
+      'primary-content': '#ffffff',
+      secondary: '#b8956a',
+      accent: '#f97316',
+      neutral: '#143123',
+      'base-100': '#ffffff',
+      'base-200': '#faf7f2',
+      'base-300': '#e5e7eb',
+      'base-content': '#143123',
+      success: '#edf8f1',
+      'success-content': '#125831',
+      error: '#fef2f2',
+      'error-content': '#991b1b',
+      info: '#eff6ff',
+      'info-content': '#1e40af',
+      '--rounded-btn': '0.75rem',
+    } }],
+  },
 };

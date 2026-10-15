@@ -1,4 +1,5 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
+import { Link, useLocation } from 'react-router-dom';
 import {
   ShoppingCart,
   Bell,
@@ -27,10 +28,10 @@ import { useEffect, useState } from 'react';
 import { notificationApi } from '../api/services';
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
+  const logout = useLogout();
   const { count } = useCart();
   const { count: wishCount } = useWishlist();
-  const navigate = useNavigate();
   const location = useLocation();
   const [unread, setUnread] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,7 +42,7 @@ export default function Navbar() {
     notificationApi
       .getAll()
       .then((res) => setUnread(res.data.unreadCount))
-      .catch(() => {});
+      .catch(() => { });
   }, [user]);
 
   useEffect(() => {
@@ -91,18 +92,17 @@ export default function Navbar() {
     <>
       <TopBar />
       <nav
-        className={`sticky top-0 z-40 transition-all duration-300 ${
-          isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' : 'bg-white py-5'
-        }`}
+        className={`sticky top-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' : 'bg-white py-5'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
 
           {/* Logo */}
           <Link to={user ? roleHome[user.role] : '/'} className="flex items-center gap-3 group">
             <div className="group-hover:scale-105 transition duration-300">
-              <img 
-                src="/kbr-logo.png" 
-                alt="KBR Fresh Foods Logo" 
+              <img
+                src="/kbr-logo.png"
+                alt="KBR Fresh Foods Logo"
                 className="h-14 w-auto object-contain py-1"
               />
             </div>
@@ -119,9 +119,16 @@ export default function Navbar() {
                 <Link to="/" className={`text-sm font-medium transition ${isActive('/') ? 'text-brand-500' : 'text-gray-700 hover:text-brand-500'}`}>
                   Home
                 </Link>
-                <Link to="/products" className={`text-sm font-semibold transition px-3 py-1.5 rounded-full border flex items-center gap-1.5 ${isActive('/products') ? 'bg-brand-500 text-white border-brand-500' : 'text-brand-600 border-brand-200 bg-brand-50 hover:bg-brand-500 hover:text-white hover:border-brand-500'}`}>
+                <Link
+                  to="/products"
+                  className={`text-sm font-medium transition flex items-center gap-1.5 ${isActive('/products')
+                      ? 'text-brand-500 font-semibold'
+                      : 'text-gray-700 hover:text-brand-500'
+                    }`}
+                >
                   <ShoppingBag size={14} /> Products
                 </Link>
+
                 <Link to="/about" className={`text-sm font-medium transition ${isActive('/about') ? 'text-brand-500' : 'text-gray-700 hover:text-brand-500'}`}>
                   About
                 </Link>
@@ -216,7 +223,7 @@ export default function Navbar() {
 
             {user && (
               <button
-                onClick={() => { logout(); navigate('/login'); }}
+                onClick={logout}
                 className="ml-1 flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-red-500 transition"
               >
                 <LogOut size={16} />
@@ -366,7 +373,7 @@ export default function Navbar() {
             <div className="pt-2">
               {user ? (
                 <button
-                  onClick={() => { logout(); navigate('/login'); }}
+                  onClick={logout}
                   className="flex items-center gap-2 text-red-500 font-semibold"
                 >
                   <LogOut size={18} /> Logout

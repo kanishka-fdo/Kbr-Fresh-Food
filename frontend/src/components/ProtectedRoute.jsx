@@ -1,3 +1,4 @@
+import { useLogout } from '../hooks/useLogout';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { ShieldX, ArrowLeft, LogOut } from 'lucide-react';
@@ -5,7 +6,8 @@ import { ShieldX, ArrowLeft, LogOut } from 'lucide-react';
 const roleHome = { admin: '/admin', staff: '/staff', driver: '/driver', wholesale: '/wholesale', customer: '/' };
 
 export default function ProtectedRoute({ children, roles }) {
-  const { user, loading, logout } = useAuth();
+  const { user, loading } = useAuth();
+  const logout = useLogout();
   const navigate = useNavigate();
 
   if (loading) {
@@ -40,7 +42,7 @@ export default function ProtectedRoute({ children, roles }) {
               <ArrowLeft size={16} /> Go to Dashboard
             </button>
             <button
-              onClick={() => { logout(); navigate('/login', { replace: true }); }}
+              onClick={logout}
               className="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-6 rounded-xl transition"
             >
               <LogOut size={16} /> Logout

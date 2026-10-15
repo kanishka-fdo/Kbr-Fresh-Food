@@ -1,5 +1,5 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useLogout } from '../../hooks/useLogout';
+import { Link, useLocation } from 'react-router-dom';
 
 /* ─────────────────────────────────────────
    Inline SVG Icons — real-world Lucide paths
@@ -100,8 +100,7 @@ const Icons = {
 
 export default function AdminSidebar({ collapsed = false, onToggle }) {
   const location = useLocation();
-  const navigate = useNavigate();
-  const { logout } = useAuth();
+  const logout = useLogout();
 
   const navItems = [
     { name: 'Dashboard',        path: '/admin',                icon: Icons.Dashboard   },
@@ -119,10 +118,7 @@ export default function AdminSidebar({ collapsed = false, onToggle }) {
     { name: 'Purchases',        path: '/admin/purchases',       icon: Icons.Purchases    },
   ];
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  const handleLogout = logout;
 
   const NavItem = ({ item }) => {
     const Icon = item.icon;

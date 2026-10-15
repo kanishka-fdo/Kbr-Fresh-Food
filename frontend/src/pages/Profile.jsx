@@ -1,3 +1,4 @@
+import { useLogout } from '../hooks/useLogout';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
@@ -24,7 +25,8 @@ const ROLE_CONFIG = {
 };
 
 export default function Profile() {
-  const { user, logout, refreshUser } = useAuth();
+  const { user, refreshUser } = useAuth();
+  const logout = useLogout();
   const navigate = useNavigate();
   const [tab, setTab] = useState('profile');
 
@@ -560,7 +562,7 @@ export default function Profile() {
               <h3 className="font-bold text-red-700 mb-2 flex items-center gap-2"><AlertCircle size={16} /> Danger Zone</h3>
               <p className="text-red-600 text-sm mb-4">Signing out will clear your session. You will need to log in again.</p>
               <button
-                onClick={() => { logout(); navigate('/login'); }}
+                onClick={logout}
                 className="flex items-center gap-2 bg-white border border-red-200 text-red-600 hover:bg-red-600 hover:text-white font-semibold px-6 py-2.5 rounded-xl transition text-sm"
               >
                 Sign Out

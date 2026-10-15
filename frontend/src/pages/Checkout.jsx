@@ -1,4 +1,7 @@
-import { useState, useEffect } from 'react';
+import { confirmAction } from '../utils/confirmAction';
+import { notify, notifyApiError } from '../utils/notifications';
+import { createSubmissionGate } from '../utils/submissionGate';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { useCart } from '../context/CartContext';
@@ -153,6 +156,8 @@ export default function Checkout() {
   // UI
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const submitOrder = useRef(createSubmissionGate({ lockAfterSuccess: true }));
+  const otpBusy = useRef(false);
 
   const currentAddress = showNewAddress
     ? { ...newAddress, lat: Number(newAddress.lat), lng: Number(newAddress.lng) }
@@ -273,6 +278,8 @@ export default function Checkout() {
   };
 
   const sendOtp = async () => {
+    if (otpBusy.current || loading) return;
+    otpBusy.current = true;
     setLoading(true);
     try {
       await orderApi.requestPaymentOtp(grandTotal);
@@ -281,15 +288,17 @@ export default function Checkout() {
       setOtpInput('');
       setOtpError('');
     } catch (err) {
-      setError(err.response?.data?.message || 'Could not send OTP. Please try again.');
+      setError(notifyApiError(err, 'Could not send OTP. Please try again.'));
     } finally {
+      otpBusy.current = false;
       setLoading(false);
     }
   };
 
   const handlePlaceOrder = async () => {
+    if (loading || otpBusy.current) return;
     setError('');
-    if (!checkoutItems.length) { setError('Your cart is empty.'); return; }
+    if (!checkoutItems.length) { setError('Your cart is empty.'); notify.error('Your cart is empty.'); return; }
     if (paymentMethod === 'card') {
       await sendOtp();
       return;
@@ -297,10 +306,15 @@ export default function Checkout() {
     await processOrderSubmission();
   };
 
-  const processOrderSubmission = async () => {
+  const processOrderSubmission = () => submitOrder.current(async () => {
     setLoading(true);
     setOtpError('');
     try {
+      if (!await confirmAction({
+        title: 'Place your order?',
+        text: `Confirm your order for Rs. ${grandTotal.toLocaleString()}, including delivery.`,
+        confirmButtonText: 'Place order',
+      })) return false;
       const res = await orderApi.create({
         items: checkoutItems.map(i => ({ product: i.product, quantity: i.quantity })),
         deliveryAddress: currentAddress,
@@ -308,11 +322,13 @@ export default function Checkout() {
         paymentOtp: paymentMethod === 'card' ? otpInput : undefined,
         cardInfo: paymentMethod === 'card' ? { last4: cardDetails.number.slice(-4), holder: cardDetails.name } : undefined,
       });
+      notify.success('Your order has been placed successfully.');
       checkoutItems.forEach(i => removeItem(i.product));
       setShow3DSecure(false);
       navigate(`/orders/${res.data.order._id}`);
+      return true;
     } catch (err) {
-      const msg = err.response?.data?.message || 'Payment verification failed.';
+      const msg = notifyApiError(err, 'Could not place your order. Please try again.');
       if (paymentMethod === 'card') {
         setOtpError(msg);
       } else {
@@ -321,7 +337,7 @@ export default function Checkout() {
     } finally {
       setLoading(false);
     }
-  };
+  });
 
   // ── Empty cart ─────────────────────────────────────────────────────────────
   if (!checkoutItems.length) {

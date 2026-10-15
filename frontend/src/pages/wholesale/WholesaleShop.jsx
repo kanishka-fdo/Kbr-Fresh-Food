@@ -1,3 +1,6 @@
+import { confirmAction } from '../../utils/confirmAction';
+import { notify, notifyApiError } from '../../utils/notifications';
+import { createSubmissionGate } from '../../utils/submissionGate';
 import { useEffect, useState, useRef } from 'react';
 import Layout from '../../components/Layout';
 import { productApi, wholesaleApi } from '../../api/services';
@@ -36,6 +39,7 @@ export default function WholesaleShop() {
   const [uploadedImages, setUploadedImages] = useState([]);
   const [notes, setNotes] = useState('');
   const fileInputRef = useRef(null);
+  const submitOrder = useRef(createSubmissionGate());
 
   useEffect(() => {
     productApi.getAll({ limit: 100 }).then((res) => setProducts(res.data.products));
@@ -87,7 +91,7 @@ export default function WholesaleShop() {
 
   const removeImage = (idx) => setUploadedImages((prev) => prev.filter((_, i) => i !== idx));
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => submitOrder.current(async () => {
     setError('');
     setMessage('');
     if (cartItems.length === 0) return setError('Add at least one item to your bulk order.');
@@ -101,20 +105,27 @@ export default function WholesaleShop() {
 
     setSubmitting(true);
     try {
+      if (!await confirmAction({
+        title: 'Submit your bulk order?',
+        text: `Submit this request for Rs. ${total.toLocaleString()} for our team to review and confirm.`,
+        confirmButtonText: 'Submit order',
+      })) return false;
       await wholesaleApi.requestQuote({
         items: cartItems.map((i) => ({ product: i.product._id, quantity: i.quantity })),
         notes,
       });
       setMessage('Bulk order submitted successfully! Our team will review and confirm shortly.');
+      notify.success('Bulk order submitted successfully! Our team will review and confirm shortly.');
       setCart({});
       setNotes('');
       setUploadedImages([]);
+      return true;
     } catch (err) {
-      setError(err.response?.data?.message || 'Could not submit order. Please try again.');
+      setError(notifyApiError(err, 'Could not submit order. Please try again.'));
     } finally {
       setSubmitting(false);
     }
-  };
+  });
 
   return (
     <Layout>

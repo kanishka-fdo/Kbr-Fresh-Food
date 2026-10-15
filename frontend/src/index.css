@@ -4,6 +4,35 @@
 @tailwind components;
 @tailwind utilities;
 
+.notification-toasts {
+  z-index: 10000;
+  width: min(26rem, 100%);
+  white-space: normal;
+  pointer-events: none;
+}
+
+.notification-toast {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  text-align: left;
+  font-size: 0.875rem;
+  border: 1px solid currentColor;
+  box-shadow: 0 8px 24px rgb(20 49 35 / 12%);
+  pointer-events: auto;
+}
+
+.swal2-popup.kbr-confirmation {
+  font-family: 'Inter', 'Outfit', system-ui, sans-serif;
+  background: oklch(var(--b1));
+  color: oklch(var(--bc));
+  border: 1px solid oklch(var(--b3));
+  border-radius: 1.25rem;
+}
+
+.kbr-confirmation .swal2-title { font-size: 1.5rem; }
+.kbr-confirmation .swal2-html-container { font-size: 0.95rem; line-height: 1.6; }
+.kbr-confirmation .swal2-icon { color: oklch(var(--p)); border-color: oklch(var(--p)); }
+.kbr-confirmation-actions { gap: 0.75rem; }
+
 @layer base {
   :root {
     --gold: #b8956a;

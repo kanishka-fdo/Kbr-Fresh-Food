@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { notify, notifyApiError } from '../utils/notifications';
 import { useAuth } from '../context/AuthContext';
 import { authApi } from '../api/services';
 import { Leaf, ArrowRight, Eye, EyeOff, MessageCircle, ShieldCheck, RefreshCw } from 'lucide-react';
@@ -35,20 +36,22 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
     const validationError = validate();
-    if (validationError) { setError(validationError); return; }
+    if (validationError) { setError(validationError); notify.error(validationError); return; }
     setError('');
     setUnverifiedEmail('');
     setResendMsg('');
     setLoading(true);
     try {
       const user = await login(form.email, form.password);
+      notify.success('You have signed in successfully.');
       navigate(roleHome[user.role] || '/');
     } catch (err) {
       if (err.response?.data?.unverified) {
         setUnverifiedEmail(err.response.data.email || form.email);
       }
-      setError(err.response?.data?.message || err.message || 'Login failed. Please check your credentials.');
+      setError(notifyApiError(err, 'Login failed. Please check your credentials.'));
     } finally {
       setLoading(false);
     }
