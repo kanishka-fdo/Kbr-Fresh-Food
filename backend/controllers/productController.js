@@ -2,7 +2,6 @@ const Product = require('../models/Product');
 const Notification = require('../models/Notification');
 const User = require('../models/User');
 
-// @route GET /api/products  (public - customers browse)
 const getProducts = async (req, res) => {
   try {
     const { category, search, page = 1, limit = 20 } = req.query;

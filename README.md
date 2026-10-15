@@ -151,7 +151,3 @@ To enable the real experience:
 - **Admin** — everything Staff can do, plus business analytics dashboard (sales trend, top products, inventory forecast, customer report) and user/role management
 - **Driver** — view assigned deliveries, advance order status, see the route to each delivery address
 - **Wholesale buyer** — request bulk quotes at wholesale pricing (subject to minimum order quantities), track approval status
-
-## Academic integrity note
-
-If you're submitting this as coursework, review your module's AI-usage disclosure policy and make sure to personalize the code/documentation (comments, naming, README) before submission — this scaffold is meant as a strong starting point, not a drop-in final submission.
