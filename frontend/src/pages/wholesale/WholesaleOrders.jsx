@@ -1,3 +1,5 @@
+import { notify, notifyApiError } from '../../utils/notifications';
+import { confirmAction } from '../../utils/confirmAction';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import { wholesaleApi } from '../../api/services';
@@ -60,13 +62,14 @@ export default function WholesaleOrders() {
 
   const handleCancel = async (e, id) => {
     e.stopPropagation();
-    if (!window.confirm('Are you sure you want to cancel this wholesale order?')) return;
+    if (!await confirmAction({ title: 'Cancel wholesale order?', text: 'Are you sure you want to cancel this wholesale order?', confirmButtonText: 'Yes, cancel order' })) return;
     setCancellingId(id);
     try {
       await wholesaleApi.cancelOrder(id);
+      notify.success('Wholesale order cancelled successfully.');
       fetchOrders();
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to cancel order');
+      notifyApiError(err, 'Failed to cancel order');
     } finally {
       setCancellingId(null);
     }

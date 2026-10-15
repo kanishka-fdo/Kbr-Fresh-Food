@@ -1,6 +1,7 @@
+import { notify } from './notifications';
 export const exportToCSV = (data, filename) => {
   if (!data || !data.length) {
-    alert("No data to export");
+    notify.error("No data to export");
     return;
   }
 

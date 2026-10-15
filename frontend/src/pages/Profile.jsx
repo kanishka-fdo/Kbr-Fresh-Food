@@ -1,3 +1,4 @@
+import { notify, notifyApiError } from '../utils/notifications';
 import { useLogout } from '../hooks/useLogout';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -71,9 +72,10 @@ export default function Profile() {
       await userApi.updateProfile(form);
       if (refreshUser) await refreshUser();
       setSaved(true);
+      notify.success('Profile updated successfully.');
       setTimeout(() => setSaved(false), 2500);
     } catch (err) {
-      console.error(err);
+      notifyApiError(err, 'Failed to update profile.');
     } finally {
       setSaving(false);
     }
@@ -86,8 +88,9 @@ export default function Profile() {
       const res = await userApi.addAddress(newAddr);
       setAddresses(res.data.addresses);
       setNewAddr({ label: 'Home', line1: '', line2: '', city: 'Negombo', isDefault: false });
+      notify.success('Address added successfully.');
     } catch (err) {
-      console.error(err);
+      notifyApiError(err, 'Failed to add address.');
     } finally {
       setAddingAddr(false);
     }
@@ -97,8 +100,9 @@ export default function Profile() {
     try {
       const res = await userApi.deleteAddress(id);
       setAddresses(res.data.addresses);
+      notify.success('Address removed successfully.');
     } catch (err) {
-      console.error(err);
+      notifyApiError(err, 'Failed to remove address.');
     }
   };
 
@@ -108,7 +112,7 @@ export default function Profile() {
     
     // Check size (max 1MB)
     if (file.size > 1024 * 1024) {
-      alert('Image is too large. Please select an image under 1MB.');
+      notify.error('Image is too large. Please select an image under 1MB.');
       return;
     }
 
@@ -118,8 +122,9 @@ export default function Profile() {
       try {
         await userApi.uploadAvatar(reader.result);
         if (refreshUser) await refreshUser();
+        notify.success('Profile picture updated successfully.');
       } catch (err) {
-        alert(err.response?.data?.message || 'Failed to upload profile picture.');
+        notifyApiError(err, 'Failed to upload profile picture.');
       } finally {
         setAvatarLoading(false);
       }

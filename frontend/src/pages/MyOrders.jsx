@@ -1,3 +1,5 @@
+import { notify, notifyApiError } from '../utils/notifications';
+import { confirmAction } from '../utils/confirmAction';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
@@ -48,13 +50,14 @@ export default function MyOrders() {
   const handleCancel = async (e, id) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!window.confirm('Are you sure you want to cancel this order?')) return;
+    if (!await confirmAction({ title: 'Cancel order?', text: 'Are you sure you want to cancel this order?', confirmButtonText: 'Yes, cancel order' })) return;
     setCancellingId(id);
     try {
       await orderApi.cancelOrder(id);
+      notify.success('Order cancelled successfully.');
       fetchOrders();
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to cancel order');
+      notifyApiError(err, 'Failed to cancel order');
       setCancellingId(null);
     }
   };

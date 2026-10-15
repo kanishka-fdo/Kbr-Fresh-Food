@@ -1,3 +1,4 @@
+import { notify } from '../../utils/notifications';
 import { useEffect, useState } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import { dashboardApi } from '../../api/services';
@@ -62,7 +63,7 @@ export default function AdminDashboard() {
 
   const handleExport = () => {
     if (!trend || trend.length === 0) {
-      alert("No data available to export");
+      notify.error("No data available to export");
       return;
     }
     const csvData = trend.map(t => ({

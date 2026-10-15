@@ -1,3 +1,4 @@
+import { notify, notifyApiError } from '../../utils/notifications';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import { wholesaleApi } from '../../api/services';
@@ -32,31 +33,47 @@ export default function StaffWholesale() {
   useEffect(load, []);
 
   const handleApprove = async (id) => {
-    await wholesaleApi.approve(id);
-    load();
+    try {
+      await wholesaleApi.approve(id);
+      notify.success('Wholesale order approved successfully.');
+      load();
+    } catch (err) {
+      notifyApiError(err, 'Failed to approve wholesale order.');
+    }
   };
 
   const handleReject = async () => {
-    await wholesaleApi.reject(rejectId, rejectReason);
-    setRejectId(null);
-    setRejectReason('');
-    load();
+    try {
+      await wholesaleApi.reject(rejectId, rejectReason);
+      notify.success('Wholesale order rejected.');
+      setRejectId(null);
+      setRejectReason('');
+      load();
+    } catch (err) {
+      notifyApiError(err, 'Failed to reject wholesale order.');
+    }
   };
 
   const handleFulfil = async (id) => {
-    await wholesaleApi.fulfil(id);
-    load();
+    try {
+      await wholesaleApi.fulfil(id);
+      notify.success('Wholesale order marked as fulfilled.');
+      load();
+    } catch (err) {
+      notifyApiError(err, 'Failed to fulfil wholesale order.');
+    }
   };
 
   const handleRecordPayment = async (e) => {
     e.preventDefault();
     try {
       await wholesaleApi.recordTransaction(recordPaymentId._id, paymentForm);
+      notify.success('Payment recorded successfully.');
       setRecordPaymentId(null);
       setPaymentForm({ amount: '', reference: '', method: 'bank_transfer' });
       load();
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to record payment');
+      notifyApiError(err, 'Failed to record payment');
     }
   };
 

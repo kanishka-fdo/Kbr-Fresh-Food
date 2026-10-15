@@ -15,6 +15,9 @@ export async function confirmAction({ title, text, confirmButtonText }) {
       cancelButtonText: 'Cancel',
       confirmButtonText,
       focusCancel: true,
+      background: '#ffffff',
+      color: '#143123',
+      backdrop: 'rgba(10, 24, 16, 0.55)',
       buttonsStyling: false,
       heightAuto: false,
       customClass: {

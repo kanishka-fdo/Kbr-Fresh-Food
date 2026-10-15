@@ -1,3 +1,5 @@
+import { notify, notifyApiError } from '../../utils/notifications';
+import { confirmAction } from '../../utils/confirmAction';
 import { useEffect, useState, useCallback } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import { userApi, wholesaleApi } from '../../api/services';
@@ -44,11 +46,12 @@ export default function AdminUsers() {
     setCreating(true);
     try {
       await userApi.createStaff(createForm);
+      notify.success('Account created successfully.');
       setShowCreateModal(false);
       setCreateForm({ name: '', email: '', password: '', phone: '', role: 'staff', vehicleNumber: '', businessName: '', businessRegNo: '' });
       await load();
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to create account');
+      notifyApiError(err, 'Failed to create account');
     } finally {
       setCreating(false);
     }
@@ -71,10 +74,11 @@ export default function AdminUsers() {
     setEditing(true);
     try {
       await userApi.updateDetails(editingUser._id, editForm);
+      notify.success('User details updated successfully.');
       setEditingUser(null);
       await load();
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to update details');
+      notifyApiError(err, 'Failed to update details');
     } finally {
       setEditing(false);
     }
@@ -111,22 +115,28 @@ export default function AdminUsers() {
     setActionLoading(id + '_role');
     try {
       await userApi.updateRole(id, role);
+      notify.success('User role updated successfully.');
       await load();
     } catch (err) {
-      alert('Failed to update role: ' + (err?.response?.data?.message || err.message));
+      notifyApiError(err, 'Failed to update role.');
     } finally {
       setActionLoading(null);
     }
   };
 
   const handleDeactivate = async (id, isActive) => {
-    if (!confirm(`Are you sure you want to ${isActive ? 'deactivate' : 'activate'} this user?`)) return;
+    if (!await confirmAction({
+      title: isActive ? 'Deactivate user?' : 'Activate user?',
+      text: `Are you sure you want to ${isActive ? 'deactivate' : 'activate'} this user?`,
+      confirmButtonText: isActive ? 'Deactivate user' : 'Activate user',
+    })) return;
     setActionLoading(id + '_deactivate');
     try {
       await userApi.deactivate(id);
+      notify.success(isActive ? 'User deactivated successfully.' : 'User activated successfully.');
       await load();
     } catch (err) {
-      alert('Failed to update status: ' + (err?.response?.data?.message || err.message));
+      notifyApiError(err, 'Failed to update user status.');
     } finally {
       setActionLoading(null);
     }
@@ -136,9 +146,10 @@ export default function AdminUsers() {
     setActionLoading(id + '_approve');
     try {
       await wholesaleApi.approveBuyer(id);
+      notify.success('Wholesale buyer approved successfully.');
       await load();
     } catch (err) {
-      alert('Failed to approve buyer: ' + (err?.response?.data?.message || err.message));
+      notifyApiError(err, 'Failed to approve buyer.');
     } finally {
       setActionLoading(null);
     }

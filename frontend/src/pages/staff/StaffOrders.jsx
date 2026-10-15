@@ -1,3 +1,4 @@
+import { notify, notifyApiError } from '../../utils/notifications';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import AdminLayout from '../../components/admin/AdminLayout';
@@ -57,23 +58,34 @@ export default function StaffOrders() {
   }, []); // Remove filter dependency so it doesn't refetch on tab change
 
   const handleStatusChange = async (id, status) => {
-    await orderApi.updateStatus(id, status);
-    load(true);
+    try {
+      await orderApi.updateStatus(id, status);
+      notify.success('Order status updated successfully.');
+      load(true);
+    } catch (err) {
+      notifyApiError(err, 'Failed to update order status.');
+    }
   };
 
   const handlePaymentStatusChange = async (id, status) => {
     try {
       await orderApi.updatePaymentStatus(id, status);
+      notify.success('Payment status updated successfully.');
       load(true);
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to update payment status');
+      notifyApiError(err, 'Failed to update payment status');
     }
   };
 
   const handleAssignDriver = async (id, driverId) => {
     if (!driverId) return;
-    await orderApi.assignDriver(id, driverId);
-    load(true);
+    try {
+      await orderApi.assignDriver(id, driverId);
+      notify.success('Driver assigned successfully.');
+      load(true);
+    } catch (err) {
+      notifyApiError(err, 'Failed to assign driver.');
+    }
   };
 
   const counts = {};

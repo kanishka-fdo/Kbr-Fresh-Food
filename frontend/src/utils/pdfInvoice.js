@@ -1,3 +1,4 @@
+import { notify } from './notifications';
 /**
  * Generates and triggers print/download of an invoice PDF for orders.
  * Uses Blob URL to bypass popup blockers.
@@ -22,7 +23,7 @@ function openOrDownloadHTML(html, filename) {
     }
   } catch (err) {
     console.error('PDF open error:', err);
-    alert('Could not open PDF. Please check your browser settings and allow popups for this site.');
+    notify.error('Could not open PDF. Please check your browser settings and allow popups for this site.');
   }
 }
 

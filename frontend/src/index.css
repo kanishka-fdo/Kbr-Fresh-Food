@@ -18,20 +18,41 @@
   border: 1px solid currentColor;
   box-shadow: 0 8px 24px rgb(20 49 35 / 12%);
   pointer-events: auto;
+  background: #eff6ff;
+  color: #1e40af;
+  opacity: 1;
+}
+
+.notification-toast.ui-alert-success {
+  background: #edf8f1;
+  color: #125831;
+}
+
+.notification-toast.ui-alert-error {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.notification-toast .ui-btn {
+  color: inherit;
 }
 
 .swal2-popup.kbr-confirmation {
   font-family: 'Inter', 'Outfit', system-ui, sans-serif;
-  background: oklch(var(--b1));
-  color: oklch(var(--bc));
-  border: 1px solid oklch(var(--b3));
+  background: #ffffff;
+  color: #143123;
+  border: 1px solid #e5e7eb;
   border-radius: 1.25rem;
 }
 
 .kbr-confirmation .swal2-title { font-size: 1.5rem; }
 .kbr-confirmation .swal2-html-container { font-size: 0.95rem; line-height: 1.6; }
-.kbr-confirmation .swal2-icon { color: oklch(var(--p)); border-color: oklch(var(--p)); }
+.kbr-confirmation .swal2-icon { color: #176f3c; border-color: #176f3c; }
 .kbr-confirmation-actions { gap: 0.75rem; }
+.kbr-confirmation .ui-btn-primary { background: #176f3c; color: #ffffff; border-color: #176f3c; }
+.kbr-confirmation .ui-btn-primary:hover { background: #125831; border-color: #125831; }
+.kbr-confirmation .ui-btn-ghost { background: #f3f4f6; color: #143123; border-color: #e5e7eb; }
+.kbr-confirmation .ui-btn-ghost:hover { background: #e5e7eb; }
 
 @layer base {
   :root {
