@@ -153,7 +153,7 @@ export default function Register() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-display font-bold text-gray-900 mb-2">Check your inbox! 📬</h2>
+          <h2 className="text-2xl font-display font-bold text-gray-900 mb-2">Check Your Inbox</h2>
           <p className="text-gray-500 mb-6 leading-relaxed">
             We've sent a verification link to:
           </p>

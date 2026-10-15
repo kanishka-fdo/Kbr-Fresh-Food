@@ -179,9 +179,10 @@ export default function StaffInventory() {
           <div className="flex flex-wrap gap-2 flex-1 max-w-2xl">
             {categories.map((c) => {
               const theme = getCategoryTheme(c.type);
+              const Icon = theme.icon;
               return (
-                <span key={c._id} className={`text-xs font-semibold px-3 py-1.5 rounded-lg border ${theme.chip} cursor-pointer hover:shadow-sm transition-all`}>
-                  {theme.emoji} {c.name}
+                <span key={c._id} className={`text-xs font-semibold px-3 py-1.5 rounded-lg border ${theme.chip} cursor-pointer hover:shadow-sm transition-all inline-flex items-center gap-1.5`}>
+                  {Icon && <Icon size={14} className="shrink-0" />} {c.name}
                 </span>
               );
             })}

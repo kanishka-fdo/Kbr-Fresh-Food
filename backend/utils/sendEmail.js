@@ -44,8 +44,8 @@ const brandedTemplate = ({ title, preheader, bodyHtml }) => `
           <tr>
             <td style="background:linear-gradient(135deg,#143123,#275740);padding:36px 40px;text-align:center;">
               <div style="display:inline-block;background:rgba(255,255,255,0.12);border-radius:16px;padding:12px 20px;margin-bottom:16px;">
-                <span style="font-size:28px;">🌿</span>
-                <span style="font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.5px;margin-left:8px;">KBR Fresh Foods</span>
+                <svg style="display:inline-block;vertical-align:middle;margin-right:8px;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#68d391" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                <span style="font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.5px;vertical-align:middle;">KBR Fresh Foods</span>
               </div>
               <div style="color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Negombo, Sri Lanka</div>
             </td>
@@ -66,7 +66,7 @@ const brandedTemplate = ({ title, preheader, bodyHtml }) => `
               <a href="mailto:info@kbrfreshfoods.lk" style="color:#306c4e;font-weight:700;text-decoration:none;font-size:14px;">info@kbrfreshfoods.lk</a>
               <span style="color:#9ca3af;margin:0 8px;">·</span>
               <a href="https://wa.me/94772501450" style="color:#306c4e;font-weight:700;text-decoration:none;font-size:14px;">+94 77 250 1450</a>
-              <p style="margin:16px 0 0;font-size:11px;color:#9ca3af;">© ${new Date().getFullYear()} KBR Fresh Foods. All rights reserved.<br/>
+              <p style="margin:16px 0 0;font-size:11px;color:#9ca3af;">&copy; ${new Date().getFullYear()} KBR Fresh Foods. All rights reserved.<br/>
               KBR Fresh Foods, Main Street, Negombo 11500, Sri Lanka</p>
             </td>
           </tr>
@@ -83,7 +83,7 @@ const brandedTemplate = ({ title, preheader, bodyHtml }) => `
  */
 const templates = {
   emailVerification: (name, verifyUrl) => ({
-    subject: '✅ Verify your KBR Fresh Foods account',
+    subject: 'Verify your KBR Fresh Foods account',
     html: brandedTemplate({
       title: `Welcome, ${name}!`,
       preheader: 'Just one click to activate your account.',
@@ -93,7 +93,7 @@ const templates = {
         </p>
         <div style="text-align:center;margin:32px 0;">
           <a href="${verifyUrl}" style="display:inline-block;background:#306c4e;color:#fff;font-size:16px;font-weight:700;padding:16px 40px;border-radius:50px;text-decoration:none;letter-spacing:0.3px;">
-            ✅ Verify My Email
+            Verify My Email
           </a>
         </div>
         <p style="color:#9ca3af;font-size:12px;text-align:center;margin:0;">
@@ -105,7 +105,7 @@ const templates = {
   }),
 
   passwordReset: (name, resetUrl) => ({
-    subject: '🔐 Reset your KBR Fresh Foods password',
+    subject: 'Reset your KBR Fresh Foods password',
     html: brandedTemplate({
       title: 'Password Reset',
       preheader: 'Your password reset link is ready.',
@@ -115,7 +115,7 @@ const templates = {
         </p>
         <div style="text-align:center;margin:32px 0;">
           <a href="${resetUrl}" style="display:inline-block;background:#306c4e;color:#fff;font-size:16px;font-weight:700;padding:16px 40px;border-radius:50px;text-decoration:none;">
-            🔐 Reset My Password
+            Reset My Password
           </a>
         </div>
         <p style="color:#9ca3af;font-size:12px;text-align:center;margin:0;">
@@ -127,7 +127,7 @@ const templates = {
   }),
 
   emailChangeOtp: (name, otp, newEmail) => ({
-    subject: '📧 Your email change OTP — KBR Fresh Foods',
+    subject: 'Your email change OTP — KBR Fresh Foods',
     html: brandedTemplate({
       title: 'Email Change Request',
       preheader: `Your OTP: ${otp}`,
@@ -151,7 +151,7 @@ const templates = {
   }),
 
   paymentOtp: (name, otp, amount) => ({
-    subject: '🔒 Secure Checkout OTP — KBR Fresh Foods',
+    subject: 'Secure Checkout OTP — KBR Fresh Foods',
     html: brandedTemplate({
       title: 'Checkout Verification',
       preheader: `Your checkout OTP: ${otp}`,
@@ -196,8 +196,8 @@ const templates = {
     };
 
     const statusLabels = {
-      pending: '⏳ Pending',
-      paid: '✅ Paid',
+      pending: 'Pending',
+      paid: 'Paid',
     };
 
     const estimatedTime = estimatedDeliveryTime
@@ -237,13 +237,13 @@ const templates = {
     `).join('');
 
     return {
-      subject: `🛍️ Order Confirmed — ${orderNumber} | KBR Fresh Foods`,
+      subject: `Order Confirmed — ${orderNumber} | KBR Fresh Foods`,
       html: brandedTemplate({
-        title: 'Order Confirmed! 🎉',
+        title: 'Order Confirmed',
         preheader: `Your order ${orderNumber} is confirmed and being prepared.`,
         bodyHtml: `
           <p style="color:#4b5563;font-size:15px;line-height:1.7;margin:16px 0 24px;">
-            Hi <strong>${name}</strong>, thank you for your order! Our team is preparing your fresh produce right now. 🌿
+            Hi <strong>${name}</strong>, thank you for your order! Our team is preparing your fresh produce right now.
           </p>
 
           <!-- Order Meta -->
@@ -310,7 +310,7 @@ const templates = {
           <!-- Invoice Note -->
           <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:14px 18px;margin:0 0 24px;">
             <p style="margin:0;font-size:13px;color:#92400e;">
-              📎 Your digital invoice is attached to this email as a PDF. Keep it for your records.
+              Your digital invoice is attached to this email as a PDF. Keep it for your records.
             </p>
           </div>
 

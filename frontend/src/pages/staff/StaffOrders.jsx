@@ -324,7 +324,7 @@ export default function StaffOrders() {
                                  className="w-full appearance-none bg-white border border-gray-200 hover:border-brand-400 rounded-lg pl-2 pr-6 py-1.5 text-xs font-bold text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all shadow-sm"
                                >
                                   <option value="" disabled>
-                                    {o.driver ? `🚗 ${o.driver.name.split(' ')[0]}` : 'Assign Driver...'}
+                                    {o.driver ? `Driver: ${o.driver.name.split(' ')[0]}` : 'Assign Driver...'}
                                   </option>
                                   {drivers.map(d => <option key={d._id} value={d._id}>{d.name}</option>)}
                                </select>
@@ -438,7 +438,7 @@ export default function StaffOrders() {
                           className="w-full appearance-none bg-white border border-gray-200 hover:border-brand-400 rounded-lg pl-2 pr-6 py-2 text-xs font-bold text-gray-700 cursor-pointer focus:outline-none shadow-sm"
                         >
                           <option value="" disabled>
-                            {o.driver ? `🚗 ${o.driver.name.split(' ')[0]}` : 'Assign Driver...'}
+                            {o.driver ? `Driver: ${o.driver.name.split(' ')[0]}` : 'Assign Driver...'}
                           </option>
                           {drivers.map((d) => (
                             <option key={d._id} value={d._id}>{d.name.split(' ')[0]}</option>

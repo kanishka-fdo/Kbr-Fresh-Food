@@ -8,7 +8,7 @@ import {
   MapPin, CreditCard, Banknote, QrCode, Plus, ArrowRight,
   CheckCircle, Shield, Phone, MessageCircle, Package, Lock,
   ChevronRight, AlertCircle, Mail, Truck, User, Building2,
-  Eye, EyeOff, X, CheckCircle2, Clock
+  Eye, EyeOff, X, CheckCircle2, Clock, Check
 } from 'lucide-react';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -419,8 +419,8 @@ export default function Checkout() {
                     <div className="space-y-4">
                       {/* Area quick-pick */}
                       <div>
-                        <label className="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide">
-                          📍 Select Your Area <span className="text-red-400">*</span>
+                        <label className="text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide flex items-center gap-1.5">
+                          <MapPin size={13} className="text-brand-600" /> Select Your Area <span className="text-red-400">*</span>
                         </label>
                         <div className="flex flex-wrap gap-2">
                           {PRESET_LOCATIONS.map(p => (
@@ -428,13 +428,13 @@ export default function Checkout() {
                               key={p.label}
                               type="button"
                               onClick={() => handlePresetPick(p)}
-                              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
+                              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all inline-flex items-center ${
                                 selectedPreset === p.label
                                   ? 'bg-brand-600 text-white border-brand-600 shadow-sm'
                                   : 'bg-white text-gray-600 border-gray-200 hover:border-brand-400 hover:text-brand-600'
                               }`}
                             >
-                              {selectedPreset === p.label && <span className="mr-1">✓</span>}
+                              {selectedPreset === p.label && <Check size={12} className="mr-1" />}
                               {p.label}
                             </button>
                           ))}
@@ -802,8 +802,15 @@ export default function Checkout() {
                     {paymentMethod === 'cod' && <p className="font-semibold text-gray-900">Cash on Delivery</p>}
                     {paymentMethod === 'qr' && <p className="font-semibold text-gray-900">QR / LankaQR</p>}
                     {paymentMethod === 'bank_transfer' && <p className="font-semibold text-gray-900">Bank Transfer</p>}
-                    <p className="text-gray-400 text-xs mt-0.5">
-                      {paymentMethod === 'card' ? '🔒 Secure card payment with OTP verification' : 'Your order will be confirmed immediately'}
+                    <p className="text-gray-400 text-xs mt-0.5 flex items-center gap-1.5">
+                      {paymentMethod === 'card' ? (
+                        <>
+                          <Lock size={12} className="text-brand-600 shrink-0" />
+                          <span>Secure card payment with OTP verification</span>
+                        </>
+                      ) : (
+                        'Your order will be confirmed immediately'
+                      )}
                     </p>
                   </div>
                 </div>

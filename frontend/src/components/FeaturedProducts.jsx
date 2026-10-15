@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 
@@ -29,7 +29,9 @@ export default function FeaturedProducts({ products }) {
       {/* Section header */}
       <div className="flex items-end justify-between mb-10">
         <div>
-          <p className="text-xs font-bold text-brand-600 uppercase tracking-widest mb-2">🌟 Handpicked for you</p>
+          <p className="text-xs font-bold text-brand-600 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+            <Sparkles size={13} className="text-brand-500" /> Handpicked for you
+          </p>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 leading-tight">
             Featured Products
           </h2>

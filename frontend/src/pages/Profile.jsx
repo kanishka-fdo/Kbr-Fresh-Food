@@ -6,7 +6,7 @@ import { userApi, authApi } from '../api/services';
 import {
   User, Phone, Mail, MapPin, Plus, Trash2, Save, Shield,
   Loader, CheckCircle, KeyRound, Lock, Eye, EyeOff, AlertCircle,
-  Building2, Smartphone, Camera
+  Building2, Smartphone, Camera, Truck, Briefcase
 } from 'lucide-react';
 
 const TABS = [
@@ -16,11 +16,11 @@ const TABS = [
 ];
 
 const ROLE_CONFIG = {
-  customer: { label: 'Customer', color: 'bg-blue-100 text-blue-700', emoji: '👤' },
-  staff: { label: 'Staff Member', color: 'bg-purple-100 text-purple-700', emoji: '🧑‍💼' },
-  admin: { label: 'Administrator', color: 'bg-red-100 text-red-700', emoji: '🛡️' },
-  driver: { label: 'Delivery Driver', color: 'bg-orange-100 text-orange-700', emoji: '🚗' },
-  wholesale: { label: 'Wholesale Buyer', color: 'bg-green-100 text-green-700', emoji: '🏢' },
+  customer: { label: 'Customer', color: 'bg-blue-100 text-blue-700', icon: User },
+  staff: { label: 'Staff Member', color: 'bg-purple-100 text-purple-700', icon: Briefcase },
+  admin: { label: 'Administrator', color: 'bg-red-100 text-red-700', icon: Shield },
+  driver: { label: 'Delivery Driver', color: 'bg-orange-100 text-orange-700', icon: Truck },
+  wholesale: { label: 'Wholesale Buyer', color: 'bg-green-100 text-green-700', icon: Building2 },
 };
 
 export default function Profile() {
@@ -151,7 +151,7 @@ export default function Profile() {
     setEmailLoading(true);
     try {
       const res = await userApi.confirmEmailChange(otp);
-      setEmailMsg('✅ Email changed successfully!');
+      setEmailMsg('Email changed successfully!');
       setEmailStep('done');
       if (refreshUser) await refreshUser();
     } catch (err) {
@@ -171,7 +171,7 @@ export default function Profile() {
     setPwLoading(true);
     try {
       await authApi.changePassword(pwForm.current, pwForm.newPw);
-      setPwMsg('✅ Password changed successfully!');
+      setPwMsg('Password changed successfully!');
       setPwForm({ current: '', newPw: '', confirm: '' });
     } catch (err) {
       setPwErr(err.response?.data?.message || 'Failed to change password. Please try again.');
@@ -217,8 +217,8 @@ export default function Profile() {
                   <Smartphone size={13} /> {user.phone}
                 </p>
               )}
-              <span className={`inline-flex items-center gap-1 mt-2 text-xs font-bold px-3 py-1 rounded-full ${roleInfo.color}`}>
-                {roleInfo.emoji} {roleInfo.label}
+              <span className={`inline-flex items-center gap-1.5 mt-2 text-xs font-bold px-3 py-1 rounded-full ${roleInfo.color}`}>
+                <roleInfo.icon size={13} /> {roleInfo.label}
               </span>
             </div>
           </div>
@@ -293,7 +293,9 @@ export default function Profile() {
             <div className="mt-8 pt-8 border-t border-gray-100 grid grid-cols-2 gap-4">
               <div className="bg-gray-50 rounded-2xl p-4">
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Account Role</p>
-                <p className="font-bold text-gray-800">{roleInfo.emoji} {roleInfo.label}</p>
+                <p className="font-bold text-gray-800 flex items-center gap-1.5">
+                  <roleInfo.icon size={15} className="text-gray-600" /> {roleInfo.label}
+                </p>
               </div>
               <div className="bg-gray-50 rounded-2xl p-4">
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Email Status</p>
@@ -433,8 +435,9 @@ export default function Profile() {
                 </div>
               ) : emailStep === 'otp' ? (
                 <form onSubmit={handleConfirmEmailChange} className="space-y-4">
-                  <p className="text-sm text-gray-600 bg-blue-50 rounded-xl p-3 border border-blue-100">
-                    📧 We sent a 6-digit OTP to <strong>{newEmail}</strong>. Enter it below to confirm the change.
+                  <p className="text-sm text-gray-600 bg-blue-50 rounded-xl p-3 border border-blue-100 flex items-start gap-2">
+                    <Mail size={16} className="text-blue-600 mt-0.5 shrink-0" />
+                    <span>We sent a 6-digit OTP to <strong>{newEmail}</strong>. Enter it below to confirm the change.</span>
                   </p>
                   {emailMsg && <p className="text-green-700 text-sm">{emailMsg}</p>}
                   {emailErr && <p className="text-red-600 text-sm flex items-center gap-1"><AlertCircle size={14} />{emailErr}</p>}

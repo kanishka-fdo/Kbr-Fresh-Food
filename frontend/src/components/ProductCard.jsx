@@ -1,4 +1,4 @@
-import { Plus, Heart } from 'lucide-react';
+import { Plus, Heart, Check } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -134,7 +134,9 @@ export default function ProductCard({ product }) {
             }`}
           >
             {added ? (
-              <>✓ Added to Cart</>
+              <span className="flex items-center justify-center gap-1">
+                <Check size={14} /> Added to Cart
+              </span>
             ) : outOfStock ? (
               'Out of Stock'
             ) : (

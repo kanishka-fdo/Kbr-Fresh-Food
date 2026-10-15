@@ -179,7 +179,7 @@ const createOrder = async (req, res) => {
         : [];
 
       await sendEmail({ to: req.user.email, subject, html, attachments });
-      console.log(`✉️  Order confirmation email sent to ${req.user.email} for order ${order.orderNumber}`);
+      console.log(`Order confirmation email sent to ${req.user.email} for order ${order.orderNumber}`);
     } catch (emailErr) {
       console.error('Failed to send order confirmation email:', emailErr.message);
       // Don't fail the order if email fails
@@ -271,12 +271,12 @@ const updateOrderStatus = async (req, res) => {
     if (populated?.customer?.email) {
       const emailTemplates = {
         out_for_delivery: {
-          subject: `Your order ${order.orderNumber} is out for delivery! 🚚`,
+          subject: `Your order ${order.orderNumber} is out for delivery!`,
           body: `<p style="color:#4b5563;">Great news! Your order <strong>${order.orderNumber}</strong> has been picked up by our driver and is on its way to you.</p><p style="color:#4b5563;">Please be available to receive your delivery. Our driver will contact you if needed.</p>`,
         },
         delivered: {
-          subject: `Order ${order.orderNumber} delivered successfully! ✅`,
-          body: `<p style="color:#4b5563;">Your order <strong>${order.orderNumber}</strong> has been delivered successfully. We hope you enjoy your fresh produce!</p><p style="color:#4b5563;">Thank you for choosing KBR Fresh Foods. 🌿</p>`,
+          subject: `Order ${order.orderNumber} delivered successfully!`,
+          body: `<p style="color:#4b5563;">Your order <strong>${order.orderNumber}</strong> has been delivered successfully. We hope you enjoy your fresh produce!</p><p style="color:#4b5563;">Thank you for choosing KBR Fresh Foods.</p>`,
         },
         cancelled: {
           subject: `Order ${order.orderNumber} has been cancelled`,
@@ -293,7 +293,7 @@ const updateOrderStatus = async (req, res) => {
           `
             <div style="font-family:sans-serif;max-width:600px;margin:auto;background:#f9fafb;border-radius:12px;overflow:hidden;">
               <div style="background:#16a34a;padding:24px 32px;">
-                <h1 style="color:white;margin:0;font-size:22px;">🌿 KBR Fresh Foods</h1>
+                <h1 style="color:white;margin:0;font-size:22px;"><svg style="display:inline-block;vertical-align:middle;margin-right:8px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</h1>
               </div>
               <div style="padding:32px;">
                 <h2 style="color:#15803d;margin-top:0;">Hi ${populated.customer.name}!</h2>
@@ -355,7 +355,7 @@ const verifyQrCode = async (req, res) => {
 
     await Notification.create({
       user: order.customer,
-      title: 'Order Delivered Successfully! ✅',
+      title: 'Order Delivered Successfully!',
       message: `Your order ${order.orderNumber} was securely delivered and verified via QR code.`,
       type: 'order_update',
       relatedOrder: order._id,
@@ -365,17 +365,17 @@ const verifyQrCode = async (req, res) => {
     if (populated?.customer?.email) {
       await emailService.sendEmail(
         populated.customer.email,
-        `Order ${order.orderNumber} delivered successfully! ✅`,
+        `Order ${order.orderNumber} delivered successfully!`,
         '',
         `
           <div style="font-family:sans-serif;max-width:600px;margin:auto;background:#f9fafb;border-radius:12px;overflow:hidden;">
             <div style="background:#16a34a;padding:24px 32px;">
-              <h1 style="color:white;margin:0;font-size:22px;">🌿 KBR Fresh Foods</h1>
+              <h1 style="color:white;margin:0;font-size:22px;"><svg style="display:inline-block;vertical-align:middle;margin-right:8px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</h1>
             </div>
             <div style="padding:32px;">
               <h2 style="color:#15803d;margin-top:0;">Hi ${populated.customer.name}!</h2>
               <p style="color:#4b5563;">Your order <strong>${order.orderNumber}</strong> has been delivered and securely verified via QR code.</p>
-              <p style="color:#4b5563;">Thank you for choosing KBR Fresh Foods. 🌿</p>
+              <p style="color:#4b5563;">Thank you for choosing KBR Fresh Foods.</p>
             </div>
           </div>
         `
@@ -445,7 +445,7 @@ const cancelOrder = async (req, res) => {
           `
             <div style="font-family:sans-serif;max-width:600px;margin:auto;background:#f9fafb;border-radius:12px;overflow:hidden;">
               <div style="background:#16a34a;padding:24px 32px;">
-                <h1 style="color:white;margin:0;font-size:22px;">🌿 KBR Fresh Foods</h1>
+                <h1 style="color:white;margin:0;font-size:22px;"><svg style="display:inline-block;vertical-align:middle;margin-right:8px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</h1>
               </div>
               <div style="padding:32px;">
                 <h2 style="color:#15803d;margin-top:0;">Hi ${populated.customer.name}!</h2>

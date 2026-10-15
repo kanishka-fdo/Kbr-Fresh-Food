@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Flame } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 
@@ -23,8 +23,8 @@ export default function TrendyProducts({ products }) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-brand-900/90 via-brand-900/40 to-transparent" />
             <div className="relative z-10 h-full flex flex-col justify-end p-8">
-              <span className="inline-block bg-brand-400 text-brand-900 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 w-fit">
-                🍛 Local Favorites
+              <span className="inline-flex items-center gap-1.5 bg-brand-400 text-brand-900 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 w-fit">
+                <Flame size={12} /> Local Favorites
               </span>
               <h3 className="font-bold text-white text-2xl leading-tight mb-4">
                 Fresh Ingredients For Your Next Curry

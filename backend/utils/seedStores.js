@@ -104,11 +104,11 @@ const seedStores = async () => {
     ];
 
     await Store.insertMany(stores);
-    console.log(`✅ ${stores.length} stores seeded successfully!`);
+    console.log(`[SUCCESS] ${stores.length} stores seeded successfully!`);
     await mongoose.disconnect();
     process.exit(0);
   } catch (error) {
-    console.error('Error seeding stores:', error);
+    console.error('[ERROR] Error seeding stores:', error);
     process.exit(1);
   }
 };

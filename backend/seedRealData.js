@@ -229,9 +229,9 @@ const run = async () => {
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
     suppCount++;
-    process.stdout.write(`\r  ✓ ${suppCount}/${SUPPLIERS.length} suppliers`);
+    process.stdout.write(`\r  [OK] ${suppCount}/${SUPPLIERS.length} suppliers`);
   }
-  console.log(`\n  ✅ ${suppCount} suppliers seeded!\n`);
+  console.log(`\n  [OK] ${suppCount} suppliers seeded!\n`);
 
   // 2. Seed Purchases
   console.log('━━━ Seeding Purchase Orders ━━━');
@@ -243,9 +243,9 @@ const run = async () => {
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
     purCount++;
-    process.stdout.write(`\r  ✓ ${purCount}/${PURCHASES.length} purchases`);
+    process.stdout.write(`\r  [OK] ${purCount}/${PURCHASES.length} purchases`);
   }
-  console.log(`\n  ✅ ${purCount} purchase orders seeded!\n`);
+  console.log(`\n  [OK] ${purCount} purchase orders seeded!\n`);
 
   // 3. Seed Products with accurate images
   console.log('━━━ Seeding Products ━━━');
@@ -282,11 +282,11 @@ const run = async () => {
       isActive: true,
     });
     prodCount++;
-    process.stdout.write(`\r  ✓ ${prodCount}/${PRODUCT_DATA.length} products`);
+    process.stdout.write(`\r  [OK] ${prodCount}/${PRODUCT_DATA.length} products`);
   }
-  console.log(`\n  ✅ ${prodCount} products seeded!\n`);
+  console.log(`\n  [OK] ${prodCount} products seeded!\n`);
 
-  console.log('🎉 All done! KBR Fresh Foods database is fully seeded.\n');
+  console.log('[SUCCESS] All done! KBR Fresh Foods database is fully seeded.\n');
   process.exit(0);
 };
 

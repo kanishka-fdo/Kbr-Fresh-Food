@@ -105,10 +105,10 @@ async function seedExactProducts() {
       created++;
     }
 
-    console.log(`\n✅  Seeded ${created} products — ALL using Unsplash real photos!\n`);
+    console.log(`\n[SUCCESS] Seeded ${created} products — ALL using Unsplash real photos!\n`);
     process.exit(0);
   } catch (err) {
-    console.error('❌ Seeding failed:', err.message);
+    console.error('[ERROR] Seeding failed:', err.message);
     process.exit(1);
   }
 }

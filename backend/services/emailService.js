@@ -54,11 +54,11 @@ exports.sendEmail = async (to, subject, text, html, attachments = []) => {
 
     const info = await transporter.sendMail(mailOptions);
     
-    console.log(`✉️  Email sent to ${to}: ${subject}`);
+    console.log(`[Email] Sent to ${to}: ${subject}`);
     
     if (info.messageId && !process.env.SMTP_USER) {
       // Ethereal provides a preview URL!
-      console.log(`🔗 Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+      console.log(`[Email] Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
     }
 
     return true;

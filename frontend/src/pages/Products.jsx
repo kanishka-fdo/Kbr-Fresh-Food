@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { productApi, categoryApi } from '../api/services';
 import ProductCard from '../components/ProductCard';
-import { Search, Filter, SlidersHorizontal, ChevronDown, X, Leaf } from 'lucide-react';
+import { Search, Filter, SlidersHorizontal, ChevronDown, X, Leaf, PackageSearch } from 'lucide-react';
 
 // Exact category photos — served from /public folder (local, always works)
 const CATEGORY_PHOTOS = {
@@ -232,7 +232,9 @@ export default function Products() {
         </div>
       ) : sorted.length === 0 ? (
         <div className="bg-gray-50 rounded-3xl p-16 text-center">
-          <div className="text-5xl mb-4">🍌</div>
+          <div className="w-16 h-16 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm border border-brand-100">
+            <PackageSearch size={32} />
+          </div>
           <p className="text-gray-500 text-lg font-medium mb-2">No products found</p>
           <p className="text-gray-400 text-sm mb-6">Try adjusting your search or filters.</p>
           <button

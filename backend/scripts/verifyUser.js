@@ -16,17 +16,17 @@ mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 10000 })
   .then(async () => {
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
-      console.error(`❌ No user found with email: ${email}`);
+      console.error(`[ERROR] No user found with email: ${email}`);
       process.exit(1);
     }
     user.isEmailVerified = true;
     user.emailVerificationToken = undefined;
     user.emailVerificationExpires = undefined;
     await user.save();
-    console.log(`✅ User "${user.name}" (${user.email}) has been verified. Role: ${user.role}`);
+    console.log(`[SUCCESS] User "${user.name}" (${user.email}) has been verified. Role: ${user.role}`);
     process.exit(0);
   })
   .catch(err => {
-    console.error('❌ DB connection failed:', err.message);
+    console.error('[ERROR] DB connection failed:', err.message);
     process.exit(1);
   });

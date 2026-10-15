@@ -45,7 +45,7 @@ const register = async (req, res) => {
 
     try {
       await sendEmail({ to: user.email, subject, html });
-      console.log(`✉️  Verification email sent to ${user.email}`);
+      console.log(`Verification email sent to ${user.email}`);
     } catch (emailErr) {
       console.error('Failed to send verification email:', emailErr.message);
       // Don't block registration if email fails — user can resend

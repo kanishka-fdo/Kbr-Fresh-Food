@@ -102,7 +102,7 @@ export function downloadInvoicePDF(order) {
   <div class="invoice-wrap">
     <div class="header">
       <div>
-        <div class="brand-name">🌿 KBR Fresh Foods</div>
+        <div class="brand-name"><svg style="display:inline-block;vertical-align:middle;margin-right:6px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</div>
         <div class="brand-sub">Negombo, Sri Lanka · Since 2010</div>
         <div class="brand-contact">
           No. 45, Colombo Road, Negombo 11500, Sri Lanka<br/>
@@ -225,7 +225,7 @@ export function downloadInventoryPDF(products) {
 <body>
   <div class="header">
     <div>
-      <div class="brand-name">🌿 KBR Fresh Foods</div>
+      <div class="brand-name"><svg style="display:inline-block;vertical-align:middle;margin-right:6px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>KBR Fresh Foods</div>
       <div class="brand-sub">Stock & Inventory Valuation Report</div>
       <div style="font-size:11px;color:#6b7280;margin-top:4px;">No. 45, Colombo Road, Negombo 11500, Sri Lanka</div>
     </div>

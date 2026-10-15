@@ -111,10 +111,10 @@ const getFreshness = async (req, res) => {
 
       let recommendation = 'Good — Normal sales';
       if (freshnessScore !== null) {
-        if (freshnessScore <= 20) recommendation = '⚠️ Sell immediately / Discard';
-        else if (freshnessScore <= 40) recommendation = '🏷️ Apply discount now';
-        else if (freshnessScore <= 60) recommendation = '📦 Prioritize wholesale orders';
-        else if (freshnessScore <= 75) recommendation = '🛒 Monitor closely';
+        if (freshnessScore <= 20) recommendation = 'Sell immediately / Discard';
+        else if (freshnessScore <= 40) recommendation = 'Apply discount now';
+        else if (freshnessScore <= 60) recommendation = 'Prioritize wholesale orders';
+        else if (freshnessScore <= 75) recommendation = 'Monitor closely';
       }
 
       return {

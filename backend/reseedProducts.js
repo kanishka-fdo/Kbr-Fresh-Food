@@ -273,23 +273,22 @@ const PRODUCT_DATA = [
 // ── Main seed function ─────────────────────────────────────────────────────────
 const run = async () => {
   await connectDB();
-  console.log('\n🌿 KBR Fresh Foods — Product Re-Seed Script');
+  console.log('\n[SEED] KBR Fresh Foods — Product Re-Seed Script');
   console.log('━'.repeat(50));
 
   // 1. Delete ALL existing products
   const deleted = await Product.deleteMany({});
-  console.log(`✅ Cleared ${deleted.deletedCount} existing products`);
+  console.log(`[OK] Cleared ${deleted.deletedCount} existing products`);
 
   // 2. Ensure categories exist
   const categoryNames = ['Banana', 'Fruit', 'Vegetable', 'OTHERS'];
-  const categoryEmojis = { Banana: '🍌', Fruit: '🍎', Vegetable: '🥦', OTHERS: '📦' };
   const catMap = {};
 
   for (const name of categoryNames) {
     let cat = await Category.findOne({ name });
     if (!cat) {
-      cat = await Category.create({ name, description: `${categoryEmojis[name]} ${name} products from KBR Fresh Foods` });
-      console.log(`  📁 Created category: ${name}`);
+      cat = await Category.create({ name, description: `Fresh ${name} products from KBR Fresh Foods` });
+      console.log(`  [CATEGORY] Created category: ${name}`);
     }
     catMap[name] = cat._id;
   }
@@ -299,7 +298,7 @@ const run = async () => {
   for (const p of PRODUCT_DATA) {
     const catId = catMap[p.category];
     if (!catId) {
-      console.warn(`  ⚠️  No category for ${p.itemCode} (${p.category}), skipping.`);
+      console.warn(`  [WARN] No category for ${p.itemCode} (${p.category}), skipping.`);
       continue;
     }
 
@@ -329,16 +328,16 @@ const run = async () => {
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
     inserted++;
-    process.stdout.write(`  ✓ ${p.itemCode}: ${p.name}\n`);
+    process.stdout.write(`  [OK] ${p.itemCode}: ${p.name}\n`);
   }
 
   console.log('━'.repeat(50));
-  console.log(`✅ Successfully seeded ${inserted} products into MongoDB`);
-  console.log('🎉 Done! Your KBR Fresh Foods catalog is ready.\n');
+  console.log(`[OK] Successfully seeded ${inserted} products into MongoDB`);
+  console.log('[SUCCESS] Done! Your KBR Fresh Foods catalog is ready.\n');
   process.exit(0);
 };
 
 run().catch((err) => {
-  console.error('❌ Seed error:', err.message);
+  console.error('[ERROR] Seed error:', err.message);
   process.exit(1);
 });

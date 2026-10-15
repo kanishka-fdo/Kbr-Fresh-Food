@@ -125,7 +125,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/30">
-          <p>© {new Date().getFullYear()} KBR Fresh Foods (Pvt) Ltd. All rights reserved. Negombo, Sri Lanka.</p>
+          <p>&copy; {new Date().getFullYear()} KBR Fresh Foods (Pvt) Ltd. All rights reserved. Negombo, Sri Lanka.</p>
           <div className="flex gap-5">
             <a href="#" className="hover:text-white transition">Privacy Policy</a>
             <a href="#" className="hover:text-white transition">Terms of Service</a>

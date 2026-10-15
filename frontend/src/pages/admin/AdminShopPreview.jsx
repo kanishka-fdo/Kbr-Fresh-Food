@@ -105,15 +105,16 @@ export default function AdminShopPreview() {
           </button>
           {categories.map((c) => {
             const theme = getCategoryTheme(c.type);
+            const Icon = theme.icon;
             return (
               <button
                 key={c._id}
                 onClick={() => setSelectedCategory(c._id === selectedCategory ? '' : c._id)}
-                className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all inline-flex items-center gap-1.5 ${
                   selectedCategory === c._id ? 'bg-brand-600 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                {theme.emoji} {c.name}
+                {Icon && <Icon size={15} className="shrink-0" />} {c.name}
               </button>
             );
           })}

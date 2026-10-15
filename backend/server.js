@@ -83,7 +83,7 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 // Start the HTTP server immediately — DB connects in the background with retry
-app.listen(PORT, () => console.log(`🚀 KBR Fresh Foods API running on port ${PORT}`));
+app.listen(PORT, () => console.log(`[API] KBR Fresh Foods server running on port ${PORT}`));
 
 // Connect to MongoDB (retries automatically on failure)
 connectDB();

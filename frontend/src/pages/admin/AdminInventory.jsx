@@ -174,7 +174,10 @@ export default function AdminInventory() {
                       </div>
                     ))}
                     {(!tabData.lowStock || tabData.lowStock.length === 0) && (
-                      <div className="px-5 py-8 text-center text-gray-400 text-sm">✅ All products are well-stocked!</div>
+                      <div className="px-5 py-8 text-center text-gray-400 text-sm flex items-center justify-center gap-1.5">
+                        <CheckCircle2 size={16} className="text-emerald-500" />
+                        All products are well-stocked!
+                      </div>
                     )}
                   </div>
                 </div>
@@ -240,8 +243,14 @@ export default function AdminInventory() {
                               <span className="text-xs text-gray-400 ml-1">(was {p.retailPrice?.toLocaleString()})</span>
                             </td>
                             <td className="px-5 py-3">
-                              <span className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full font-bold">
-                                {p.daysLeft <= 1 ? '⚠️ Discard/Discount' : 'Apply Discount'}
+                              <span className="text-xs bg-red-100 text-red-700 px-2.5 py-1 rounded-full font-bold inline-flex items-center gap-1">
+                                {p.daysLeft <= 1 ? (
+                                  <>
+                                    <AlertTriangle size={11} /> Discard/Discount
+                                  </>
+                                ) : (
+                                  'Apply Discount'
+                                )}
                               </span>
                             </td>
                           </tr>
@@ -308,13 +317,27 @@ export default function AdminInventory() {
                 </div>
               </div>
               {tabData.suggestions?.length === 0 && (
-                <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center text-gray-400">✅ All products are at full freshness — no price adjustments needed!</div>
+                <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center text-gray-400 flex items-center justify-center gap-2">
+                  <CheckCircle2 size={18} className="text-emerald-500" />
+                  All products are at full freshness — no price adjustments needed!
+                </div>
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {tabData.suggestions?.map(p => (
                   <div key={p._id} className={`bg-white rounded-2xl border shadow-sm overflow-hidden ${p.urgency === 'critical' ? 'border-red-200' : p.urgency === 'high' ? 'border-orange-200' : 'border-yellow-200'}`}>
-                    <div className={`px-4 py-2 text-xs font-bold uppercase tracking-wider text-white ${p.urgency === 'critical' ? 'bg-red-500' : p.urgency === 'high' ? 'bg-orange-500' : 'bg-yellow-500'}`}>
-                      {p.urgency === 'critical' ? '🚨 Critical' : p.urgency === 'high' ? '⚠️ High Priority' : '📌 Monitor'} · {p.freshnessScore}% Fresh
+                    <div className={`px-4 py-2 text-xs font-bold uppercase tracking-wider text-white flex items-center gap-1.5 ${p.urgency === 'critical' ? 'bg-red-500' : p.urgency === 'high' ? 'bg-orange-500' : 'bg-yellow-500'}`}>
+                      {p.urgency === 'critical' ? (
+                        <>
+                          <AlertTriangle size={13} /> Critical
+                        </>
+                      ) : p.urgency === 'high' ? (
+                        <>
+                          <AlertTriangle size={13} /> High Priority
+                        </>
+                      ) : (
+                        'Monitor'
+                      )}{' '}
+                      · {p.freshnessScore}% Fresh
                     </div>
                     <div className="p-4">
                       <h4 className="font-bold text-gray-900 mb-1">{p.name}</h4>

@@ -53,11 +53,11 @@ export default function VerifyEmail() {
             <div className="w-20 h-20 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 size={40} />
             </div>
-            <h2 className="text-2xl font-display font-bold text-gray-900 mb-3">Email Verified! ✅</h2>
+            <h2 className="text-2xl font-display font-bold text-gray-900 mb-3">Email Verified!</h2>
             <p className="text-gray-600 mb-8 leading-relaxed">
               {message}
               <br /><br />
-              Welcome to <strong>KBR Fresh Foods</strong> — Negombo's freshest produce, delivered to your door. 🌿
+              Welcome to <strong>KBR Fresh Foods</strong> — Negombo's freshest produce, delivered to your door.
             </p>
             <Link
               to="/login"

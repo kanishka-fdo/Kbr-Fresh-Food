@@ -60,7 +60,7 @@ const seedProducts = [
 async function runSeed() {
   try {
     await mongoose.connect(MONGO_URI);
-    console.log('✅ Connected to MongoDB');
+    console.log('[OK] Connected to MongoDB');
 
     // 1. Create Categories if not exist
     console.log('Seeding Categories...');
@@ -95,10 +95,10 @@ async function runSeed() {
 
     await Product.insertMany(formattedProducts);
     
-    console.log('✅ Seeding Complete!');
+    console.log('[SUCCESS] Seeding Complete!');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Seeding Error:', error);
+    console.error('[ERROR] Seeding Error:', error);
     process.exit(1);
   }
 }

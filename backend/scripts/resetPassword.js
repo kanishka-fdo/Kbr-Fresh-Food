@@ -17,16 +17,16 @@ mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 10000 })
   .then(async () => {
     const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
     if (!user) {
-      console.error(`❌ No user found with email: ${email}`);
+      console.error(`[ERROR] No user found with email: ${email}`);
       process.exit(1);
     }
     user.password = newPassword; // will be hashed by pre-save hook
     user.isEmailVerified = true; // ensure verified
     await user.save();
-    console.log(`✅ Password reset for "${user.name}" (${user.email}). New password: ${newPassword}`);
+    console.log(`[SUCCESS] Password reset for "${user.name}" (${user.email}). New password: ${newPassword}`);
     process.exit(0);
   })
   .catch(err => {
-    console.error('❌ DB connection failed:', err.message);
+    console.error('[ERROR] DB connection failed:', err.message);
     process.exit(1);
   });
