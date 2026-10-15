@@ -136,7 +136,7 @@ To enable the real experience:
 
 **Expanded catalog** — 8 categories (Fruits, Vegetables, Dairy & Eggs, Rice & Grains, Spices & Herbs, Bakery, Beverages, Seafood) and ~35 seeded products covering a full grocery range, not just fruit and veg. Staff can add further categories and products directly from **Staff → Inventory** in the app.
 
-**Hardened backend security**:
+***Hardened backend security***:
 - `helmet` — sets secure HTTP headers (CSP, HSTS, X-Frame-Options, etc.)
 - `express-rate-limit` — throttles all API traffic (300 req/15min per IP) with a stricter limit on `/api/auth` (20 req/15min) to slow credential-stuffing attempts
 - `express-mongo-sanitize` — strips `$`/`.` operators from incoming data to block NoSQL injection
@@ -144,10 +144,10 @@ To enable the real experience:
 - `compression` — gzip response compression
 - existing: JWT auth, bcrypt password hashing, email verification, role-based access control, request body size limits
 
-## Key features by role
+#### KEY FEATURES BY ROLE
 
-- **Customer** — browse products, cart, checkout with address + payment method, live order tracking with delivery-route map, notifications
-- **Staff** — order management (status updates, driver assignment), inventory CRUD with low-stock/expiry alerts, wholesale order approval
-- **Admin** — everything Staff can do, plus business analytics dashboard (sales trend, top products, inventory forecast, customer report) and user/role management
-- **Driver** — view assigned deliveries, advance order status, see the route to each delivery address
-- **Wholesale buyer** — request bulk quotes at wholesale pricing (subject to minimum order quantities), track approval status
+- **Customer** - browse products, cart, checkout with address + payment method, live order tracking with delivery-route map, notifications
+- **Staff** - order management (status updates, driver assignment), inventory CRUD with low-stock/expiry alerts, wholesale order approval
+- **Admin** - everything Staff can do, plus business analytics dashboard (sales trend, top products, inventory forecast, customer report) and user/role management
+- **Driver** - view assigned deliveries, advance order status, see the route to each delivery address
+- **Wholesale buyer** - request bulk quotes at wholesale pricing (subject to minimum order quantities), track approval status

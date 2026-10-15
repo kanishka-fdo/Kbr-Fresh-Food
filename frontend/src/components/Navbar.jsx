@@ -1,5 +1,25 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { ShoppingCart, Bell, LogOut, Leaf, Phone, User, Menu, X, Heart, MapPin } from 'lucide-react';
+import {
+  ShoppingCart,
+  Bell,
+  LogOut,
+  Leaf,
+  Phone,
+  User,
+  Menu,
+  X,
+  Heart,
+  MapPin,
+  Home,
+  ShoppingBag,
+  Mail,
+  Package,
+  LayoutDashboard,
+  Users,
+  Boxes,
+  Building2,
+  Truck
+} from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -50,7 +70,10 @@ export default function Navbar() {
     <div className="bg-brand-500 text-white py-2 px-4 hidden md:block text-xs font-medium tracking-wide">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex gap-4">
-          <span>🌿 Farm-fresh produce · Negombo, Sri Lanka · Free delivery on orders over Rs 2,000</span>
+          <span className="flex items-center gap-1.5">
+            <Leaf size={13} className="text-brand-200" />
+            Farm-fresh produce · Negombo, Sri Lanka · Free delivery on orders over Rs 2,000
+          </span>
         </div>
         <div className="flex gap-6">
           <Link to="/stores" className="flex items-center gap-1.5 hover:text-brand-100 transition cursor-pointer">
@@ -96,8 +119,8 @@ export default function Navbar() {
                 <Link to="/" className={`text-sm font-medium transition ${isActive('/') ? 'text-brand-500' : 'text-gray-700 hover:text-brand-500'}`}>
                   Home
                 </Link>
-                <Link to="/products" className={`text-sm font-semibold transition px-3 py-1.5 rounded-full border ${isActive('/products') ? 'bg-brand-500 text-white border-brand-500' : 'text-brand-600 border-brand-200 bg-brand-50 hover:bg-brand-500 hover:text-white hover:border-brand-500'}`}>
-                  🛒 Products
+                <Link to="/products" className={`text-sm font-semibold transition px-3 py-1.5 rounded-full border flex items-center gap-1.5 ${isActive('/products') ? 'bg-brand-500 text-white border-brand-500' : 'text-brand-600 border-brand-200 bg-brand-50 hover:bg-brand-500 hover:text-white hover:border-brand-500'}`}>
+                  <ShoppingBag size={14} /> Products
                 </Link>
                 <Link to="/about" className={`text-sm font-medium transition ${isActive('/about') ? 'text-brand-500' : 'text-gray-700 hover:text-brand-500'}`}>
                   About
@@ -233,50 +256,110 @@ export default function Navbar() {
           <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-xl py-4 px-4 flex flex-col gap-3 animate-fade-in-up z-50">
             {(!user || user.role === 'customer') && (
               <>
-                <Link to="/" className="text-gray-800 font-medium py-2 border-b border-gray-50">🏠 Home</Link>
-                <Link to="/products" className="text-brand-600 font-bold py-2 border-b border-gray-50 bg-brand-50 px-3 rounded-xl">🛒 All Products</Link>
-                <Link to="/about" className="text-gray-800 font-medium py-2 border-b border-gray-50">🌿 About Us</Link>
-                <Link to="/stores" className="text-gray-800 font-medium py-2 border-b border-gray-50">📍 Find a Store</Link>
-                <Link to="/contact" className="text-gray-800 font-medium py-2 border-b border-gray-50">📩 Contact</Link>
+                <Link to="/" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Home size={18} className="text-brand-600" /> Home
+                </Link>
+                <Link to="/products" className="flex items-center gap-2.5 text-brand-600 font-bold py-2 border-b border-gray-50 bg-brand-50 px-3 rounded-xl">
+                  <ShoppingBag size={18} className="text-brand-600" /> All Products
+                </Link>
+                <Link to="/about" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Leaf size={18} className="text-brand-600" /> About Us
+                </Link>
+                <Link to="/stores" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <MapPin size={18} className="text-brand-600" /> Find a Store
+                </Link>
+                <Link to="/contact" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Mail size={18} className="text-brand-600" /> Contact
+                </Link>
 
-                <Link to="/wishlist" className="flex items-center gap-2 text-gray-800 font-medium py-2 border-b border-gray-50"><Heart size={16} className="text-red-500" /> Wishlist {wishCount > 0 && `(${wishCount})`}</Link>
-                {user && <Link to="/orders" className="text-gray-800 font-medium py-2 border-b border-gray-50">📦 My Orders</Link>}
-                {user && <Link to="/profile" className="text-gray-800 font-medium py-2 border-b border-gray-50">👤 Profile</Link>}
-                {user && <Link to="/notifications" className="text-gray-800 font-medium py-2 border-b border-gray-50">🔔 Notifications {unread > 0 && `(${unread})`}</Link>}
+                <Link to="/wishlist" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Heart size={18} className="text-red-500" /> Wishlist {wishCount > 0 && `(${wishCount})`}
+                </Link>
+                {user && (
+                  <Link to="/orders" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                    <Package size={18} className="text-brand-600" /> My Orders
+                  </Link>
+                )}
+                {user && (
+                  <Link to="/profile" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                    <User size={18} className="text-brand-600" /> Profile
+                  </Link>
+                )}
+                {user && (
+                  <Link to="/notifications" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                    <Bell size={18} className="text-brand-600" /> Notifications {unread > 0 && `(${unread})`}
+                  </Link>
+                )}
               </>
             )}
             {user?.role === 'staff' && (
               <>
-                <Link to="/staff" className="text-gray-800 font-medium py-2 border-b border-gray-50">Orders</Link>
-                <Link to="/staff/inventory" className="text-gray-800 font-medium py-2 border-b border-gray-50">Inventory</Link>
-                <Link to="/staff/wholesale" className="text-gray-800 font-medium py-2 border-b border-gray-50">Wholesale</Link>
-                <Link to="/profile" className="text-gray-800 font-medium py-2 border-b border-gray-50">👤 Profile</Link>
-                <Link to="/notifications" className="text-gray-800 font-medium py-2 border-b border-gray-50">🔔 Notifications {unread > 0 && `(${unread})`}</Link>
+                <Link to="/staff" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Package size={18} className="text-brand-600" /> Orders
+                </Link>
+                <Link to="/staff/inventory" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Boxes size={18} className="text-brand-600" /> Inventory
+                </Link>
+                <Link to="/staff/wholesale" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Building2 size={18} className="text-brand-600" /> Wholesale
+                </Link>
+                <Link to="/profile" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <User size={18} className="text-brand-600" /> Profile
+                </Link>
+                <Link to="/notifications" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Bell size={18} className="text-brand-600" /> Notifications {unread > 0 && `(${unread})`}
+                </Link>
               </>
             )}
             {user?.role === 'admin' && (
               <>
-                <Link to="/admin" className="text-gray-800 font-medium py-2 border-b border-gray-50">Dashboard</Link>
-                <Link to="/admin/users" className="text-gray-800 font-medium py-2 border-b border-gray-50">Users</Link>
-                <Link to="/staff" className="text-gray-800 font-medium py-2 border-b border-gray-50">Orders</Link>
-                <Link to="/staff/inventory" className="text-gray-800 font-medium py-2 border-b border-gray-50">Inventory</Link>
-                <Link to="/profile" className="text-gray-800 font-medium py-2 border-b border-gray-50">👤 Profile</Link>
-                <Link to="/notifications" className="text-gray-800 font-medium py-2 border-b border-gray-50">🔔 Notifications {unread > 0 && `(${unread})`}</Link>
+                <Link to="/admin" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <LayoutDashboard size={18} className="text-brand-600" /> Dashboard
+                </Link>
+                <Link to="/admin/users" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Users size={18} className="text-brand-600" /> Users
+                </Link>
+                <Link to="/staff" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Package size={18} className="text-brand-600" /> Orders
+                </Link>
+                <Link to="/staff/inventory" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Boxes size={18} className="text-brand-600" /> Inventory
+                </Link>
+                <Link to="/profile" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <User size={18} className="text-brand-600" /> Profile
+                </Link>
+                <Link to="/notifications" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Bell size={18} className="text-brand-600" /> Notifications {unread > 0 && `(${unread})`}
+                </Link>
               </>
             )}
             {user?.role === 'driver' && (
               <>
-                <Link to="/driver" className="text-gray-800 font-medium py-2 border-b border-gray-50">My Deliveries</Link>
-                <Link to="/profile" className="text-gray-800 font-medium py-2 border-b border-gray-50">👤 Profile</Link>
-                <Link to="/notifications" className="text-gray-800 font-medium py-2 border-b border-gray-50">🔔 Notifications {unread > 0 && `(${unread})`}</Link>
+                <Link to="/driver" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Truck size={18} className="text-brand-600" /> My Deliveries
+                </Link>
+                <Link to="/profile" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <User size={18} className="text-brand-600" /> Profile
+                </Link>
+                <Link to="/notifications" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Bell size={18} className="text-brand-600" /> Notifications {unread > 0 && `(${unread})`}
+                </Link>
               </>
             )}
             {user?.role === 'wholesale' && (
               <>
-                <Link to="/wholesale" className="text-gray-800 font-medium py-2 border-b border-gray-50">Bulk Order</Link>
-                <Link to="/wholesale/orders" className="text-gray-800 font-medium py-2 border-b border-gray-50">My Orders</Link>
-                <Link to="/profile" className="text-gray-800 font-medium py-2 border-b border-gray-50">👤 Profile</Link>
-                <Link to="/notifications" className="text-gray-800 font-medium py-2 border-b border-gray-50">🔔 Notifications {unread > 0 && `(${unread})`}</Link>
+                <Link to="/wholesale" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <ShoppingBag size={18} className="text-brand-600" /> Bulk Order
+                </Link>
+                <Link to="/wholesale/orders" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Package size={18} className="text-brand-600" /> My Orders
+                </Link>
+                <Link to="/profile" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <User size={18} className="text-brand-600" /> Profile
+                </Link>
+                <Link to="/notifications" className="flex items-center gap-2.5 text-gray-800 font-medium py-2 border-b border-gray-50">
+                  <Bell size={18} className="text-brand-600" /> Notifications {unread > 0 && `(${unread})`}
+                </Link>
               </>
             )}
 
