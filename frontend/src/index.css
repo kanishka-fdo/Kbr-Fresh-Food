@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.notification-toasts {
+  z-index: 10000;
+  width: min(26rem, 100%);
+  white-space: normal;
+  pointer-events: none;
+}
+
+.notification-toast {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  text-align: left;
+  font-size: 0.875rem;
+  border: 1px solid currentColor;
+  box-shadow: 0 8px 24px rgb(20 49 35 / 12%);
+  pointer-events: auto;
+  background: #eff6ff;
+  color: #1e40af;
+  opacity: 1;
+}
+
+.notification-toast.ui-alert-success {
+  background: #edf8f1;
+  color: #125831;
+}
+
+.notification-toast.ui-alert-error {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.notification-toast .ui-btn {
+  color: inherit;
+}
+
+.swal2-popup.kbr-confirmation {
+  font-family: 'Inter', 'Outfit', system-ui, sans-serif;
+  background: #ffffff;
+  color: #143123;
+  border: 1px solid #e5e7eb;
+  border-radius: 1.25rem;
+}
+
+.kbr-confirmation .swal2-title { font-size: 1.5rem; }
+.kbr-confirmation .swal2-html-container { font-size: 0.95rem; line-height: 1.6; }
+.kbr-confirmation .swal2-icon { color: #176f3c; border-color: #176f3c; }
+.kbr-confirmation-actions { gap: 0.75rem; }
+.kbr-confirmation .ui-btn-primary { background: #176f3c; color: #ffffff; border-color: #176f3c; }
+.kbr-confirmation .ui-btn-primary:hover { background: #125831; border-color: #125831; }
+.kbr-confirmation .ui-btn-ghost { background: #f3f4f6; color: #143123; border-color: #e5e7eb; }
+.kbr-confirmation .ui-btn-ghost:hover { background: #e5e7eb; }
+
+@layer base {
+  :root {
+    --gold: #b8956a;
+    --gold-light: #d4af82;
+    --cream: #faf7f2;
+    --forest: #0d1f0d;
+    --forest-mid: #1a3a1a;
+    --ink: #0a0a0a;
+    --kandyan-red: #8b1c1c;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', 'Outfit', system-ui, sans-serif;
+    @apply antialiased text-gray-900 bg-white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+  }
+
+  .font-editorial {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  .font-inter {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+.status-badge {
+  @apply inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
